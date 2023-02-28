@@ -2,11 +2,11 @@ name: Pripravi Arhive
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "gh-actions" ]
     paths-ignore:
-      - '*.pdf'
+      - '*.zip'
   pull_request:
-    branches: [ "master" ]
+    branches: [ "gh-actions" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -18,12 +18,12 @@ jobs:
       image: lunarstarlight/fmfdelo-texlive:latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+          fetch-depth: 0
       - name: Pripravi arhive
         run : |
-          # dbus-daemon --system
-          # flatpak repair --system --reinstall-all
-          # flatpak run --command=verapdf org.verapdf.veraPDF --help
           git config --global --add safe.directory /__w/fmfdelo/fmfdelo
           cd predloge
           for dirname in $(ls); do
@@ -45,4 +45,25 @@ jobs:
                   cd ..
               fi
           done
+      - name: Semantic Release
+        uses: wow-actions/release-github-action@v2
+        with:
+          dry-run: true
+          branches: gh-actions
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GIT_AUTHOR_NAME: ${{ env.BOT_NAME }}[bot]
+          GIT_AUTHOR_EMAIL: ${{ env.BOT_NAME }}[bot]@users.noreply.github.com
+          GIT_COMMITTER_NAME: ${{ env.BOT_NAME }}[bot]
+          GIT_COMMITTER_EMAIL: ${{ env.BOT_NAME }}[bot]@users.noreply.github.com
+      # - name: Commit archives
+      #   run: |
+      #     git config --local user.email "github-actions[bot]@users.noreply.github.com"
+      #     git config --local user.name "github-actions[bot]"
+      #     git commit -a -m "Posodobi arhive"
+      # - name: Objavi arhive
+      #   uses: ad-m/github-push-action@master
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     branch: ${{ github.ref }}
 

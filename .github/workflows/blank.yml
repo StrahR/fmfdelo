@@ -44,8 +44,8 @@ jobs:
                   git clean -Xdf
                   cd ..
               fi
-            cd ..
           done
+          cd ..
       # - name: Semantic Release
       #   uses: wow-actions/release-github-action@v2
       #   with:

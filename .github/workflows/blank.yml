@@ -48,8 +48,8 @@ jobs:
           cd ..
       - name: Posodobi arhive
         run: |
-          git config --local user.name github-actions[bot]"
-          git config --local user.email 41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -f arhivi/*.zip
           git commit -m "Posodobi arhive [skip ci]"
       - name: Objavi arhive

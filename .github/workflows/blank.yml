@@ -20,8 +20,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          persist-credentials: false
-          fetch-depth: 0
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
+          fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
       - name: Pripravi arhive
         run : |
           git config --global --add safe.directory /__w/fmfdelo/fmfdelo
@@ -46,21 +46,10 @@ jobs:
               fi
           done
           cd ..
-      # - name: Semantic Release
-      #   uses: wow-actions/release-github-action@v2
-      #   with:
-      #     dry-run: true
-      #     branches: gh-actions
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     GIT_AUTHOR_NAME: ${{ env.BOT_NAME }}[bot]
-      #     GIT_AUTHOR_EMAIL: ${{ env.BOT_NAME }}[bot]@users.noreply.github.com
-      #     GIT_COMMITTER_NAME: ${{ env.BOT_NAME }}[bot]
-      #     GIT_COMMITTER_EMAIL: ${{ env.BOT_NAME }}[bot]@users.noreply.github.com
-      - name: Commit archives
+      - name: Posodobi arhive
         run: |
-          git config --local user.name "${{ env.BOT_NAME }}[bot]"
-          git config --local user.email "${{ env.BOT_NAME }}[bot]@users.noreply.github.com"
+          git config --local user.name github-actions[bot]"
+          git config --local user.email 41898282+github-actions[bot]@users.noreply.github.com"
           git add -f arhivi/*.zip
           git commit -m "Posodobi arhive [skip ci]"
       - name: Objavi arhive

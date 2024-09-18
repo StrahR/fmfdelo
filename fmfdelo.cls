@@ -26,6 +26,7 @@
 \newboolean{@enovitistudij}
 \newboolean{@fri}
 \newboolean{@anglescina}
+\newboolean{@brezslovenscine}
 \newboolean{@tisk}
 \newboolean{@trst}
 \newboolean{@index}
@@ -87,6 +88,11 @@
   \setboolean{@drugastopnja}{true}
   \def\@programme{Programme for a double master's degree in mathematics}
   \def\@it@thesistype{Tesi finale}
+}
+\DeclareOption{prevod}{
+  \setboolean{@anglescina}{true}
+  \setboolean{@brezslovenscine}{true}
+  \def\@programme{Mathematics}
 }
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
@@ -450,6 +456,7 @@
 % RAZNO
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\@unless{\boolean{@brezslovenscine}}{
 % pokončno napisan tekst
 \theoremstyle{definition}
 \newtheorem{aksiom}{Aksiom}
@@ -467,6 +474,7 @@
 }{
   \popQED\end{zgled*}
 }
+}
 \@ifthen{\boolean{@anglescina}}{
 \newtheorem{axiom}{Axiom}
 \newtheorem{definition}{Definition}[section]
@@ -479,12 +487,15 @@
 }
 }
 
- % poševno napisan tekst
+\@unless{\boolean{@brezslovenscine}}{
+% poševno napisan tekst
 \theoremstyle{plain}
 \newtheorem{lema}[definicija]{Lema}
 \newtheorem{izrek}[definicija]{Izrek}
 \newtheorem{trditev}[definicija]{Trditev}
 \newtheorem{posledica}[definicija]{Posledica}
+\newenvironment{dokaz}[1][Dokaz]{\begin{proof}[#1]}{\end{proof}}
+}
 \@ifthen{\boolean{@anglescina}}{
 \newtheorem{lemma}[definition]{Lemma}
 \newtheorem{theorem}[definition]{Theorem}
@@ -499,14 +510,14 @@
 }
 
 \numberwithin{equation}{section}  % števec za enačbe zgleda kot (2.7) in se resetira v vsakem razdelku
-\newenvironment{dokaz}[1][Dokaz]{\begin{proof}[#1]}{\end{proof}}
-
 % bold matematika znotraj \textbf{ }, tudi v naslovih
 \g@addto@macro\bfseries{\boldmath}
 
+\@unless{\boolean{@brezslovenscine}}{
 % Poimenuj kazalo slik kot ``Kazalo slik'' in ne ``Slike''
 \addto\captionsslovene{
   \renewcommand{\listfigurename}{Kazalo slik}%
+}
 }
 
 % generiraj vsebinsko kazalo
@@ -549,17 +560,23 @@
 }
 \def\@frontpages@en{
   \@frontpages@en@frontpage
-  \@frontpages@sl@naslovnica
+  \@unless{\boolean{@brezslovenscine}}{
+    \@frontpages@sl@naslovnica
+  }
   \@frontpages@en@acknowledgements
   \@frontpages@common@toc
+  \@unless{\boolean{@brezslovenscine}}{
   \@ifthen{\boolean{@drugastopnja}}{
     \@frontpages@common@program
+  }
   }
 
   \thispagestyle{empty}
   \pdfbookmark[1]{Abstract}{abstract}
   \@frontpages@en@abstract
-  \@frontpages@sl@povzetek
+  \@unless{\boolean{@brezslovenscine}}{
+    \@frontpages@sl@povzetek
+  }
   \@frontpages@en@keywords
   \cleardoublepage
 }
@@ -806,8 +823,11 @@
   \noindent
   \textbf{Math. Subj. Class. (2020):} \@klasifikacija \\[1mm]
   \def\sep{, } % Pri izpisu ključne besede ločimo z vejico.
-  \textbf{Keywords:} \@keywords \\[1mm]
-  \textbf{Ključne besede:} \@kljucnebesede
+  \textbf{Keywords:} \@keywords
+  \@unless{\boolean{@brezslovenscine}}{
+    \\[1mm]
+    \textbf{Ključne besede:} \@kljucnebesede
+  }
 }
 \def\@frontpages@trst@keywords{
   \noindent
@@ -875,11 +895,13 @@
 
 
 \AtEndDocument{%
+\@unless{\boolean{@brezslovenscine}}{
 \ifdefined\@slovar
 \pdfbookmark[1]{Slovar strokovnih izrazov}{slovar}
 \section*{Slovar strokovnih izrazov}
 \@slovar
 \fi
+}
 \ifdefined\@literatura
 \cleardoublepage
 \phantomsection
@@ -903,6 +925,8 @@
   \cleardoublepage
   \@make@razsirjenipovzetek{italian}{Sintesi estesa}{\@it@razsirjenipovzetek}
 }
+
+\@unless{\boolean{@brezslovenscine}}{
 \@ifthen{\boolean{@anglescina}}{
   % spremeni številčenje definicij, izrekov, ipd. na ustrezen nivo
   \let\definicija\undefined
@@ -912,7 +936,7 @@
 
   \cleardoublepage
   \@make@razsirjenipovzetek{slovene}{Razsirjeni povzetek}{\@razsirjenipovzetek}
-}
+}}
 
 % only print the index (and clear the page) if the \index command has been used
 \@ifthen{\boolean{@index}}{

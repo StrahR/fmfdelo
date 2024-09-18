@@ -84,3 +84,8 @@ se bo lahko odvisno od vrste vira izpisalo kot _Predloge za zaključna dela na F
 #### Ostale napake
 
 Še enkrat, če napake na seznamu ne najdete, **ne spreminjajte datoteke ali strukture predloge**, temveč opozorite razvijalce, da jo lahko preprečimo tudi za ostale uporabnike.
+
+## Razno
+
+Če želite vaše delo prevesti v angleščino, recimo, da ga lahko pošljete univerzam v tujini, ko se prijavljate na doktorat, prenesite sledečo predlogo:
+[magisterij-primer-en-prevod.zip](arhivi/magisterij-primer-en-prevod.zip): primer prevoda magistrskega dela v angleščino

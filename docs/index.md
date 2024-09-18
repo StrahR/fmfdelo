@@ -26,6 +26,12 @@ _Razvijalci_: [Luna Strah](mailto:strah.luna@gmail.com), Jure Slak, Matija Pretn
 - [diploma-primer-trst.zip](arhivi/diploma-primer-trst.zip): primer dela programa dvojne diplome na Trstu
 - [magisterij-primer-trst.zip](arhivi/magisterij-primer-trst.zip): primer dela programa dvojnega magisterija na Trstu
 
+## Razno
+
+Če želite vaše delo prevesti v angleščino, recimo, da ga lahko pošljete univerzam v tujini, ko se prijavljate na doktorat, prenesite sledečo predlogo:
+
+- [magisterij-primer-en-prevod.zip](arhivi/magisterij-primer-en-prevod.zip): primer prevoda magistrskega dela v angleščino
+
 ## Navodila za uporabo
 
 Za urejanje dokumentov močno priporočamo [Visual Studio Code](https://code.visualstudio.com) s podaljškom [LaTeX Workshop](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop) in podaljškom za črkovanje [LTeX](https://marketplace.visualstudio.com/items?itemName=valentjn.vscode-ltex). Za preverjanje črkovanja neodvisno od urejevalnika lahko uporabite [aspell](http://aspell.net/).
@@ -84,8 +90,3 @@ se bo lahko odvisno od vrste vira izpisalo kot _Predloge za zaključna dela na F
 #### Ostale napake
 
 Še enkrat, če napake na seznamu ne najdete, **ne spreminjajte datoteke ali strukture predloge**, temveč opozorite razvijalce, da jo lahko preprečimo tudi za ostale uporabnike.
-
-## Razno
-
-Če želite vaše delo prevesti v angleščino, recimo, da ga lahko pošljete univerzam v tujini, ko se prijavljate na doktorat, prenesite sledečo predlogo:
-[magisterij-primer-en-prevod.zip](arhivi/magisterij-primer-en-prevod.zip): primer prevoda magistrskega dela v angleščino
